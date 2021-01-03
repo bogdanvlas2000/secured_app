@@ -22,7 +22,9 @@ create table users_roles
             references users (id),
     constraint role_fk
         foreign key (role_id)
-            references roles (id)
+            references roles (id),
+    constraint unique_user_role
+        unique (user_id, role_id)
 );
 
 insert users(username, password, email)
