@@ -7,18 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails
 class UserPrincipal(val user: User) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         val authorities = mutableListOf<GrantedAuthority>()
-        user.getRolesList().forEach {
-            if (it.isNotEmpty()) {
-                val authority = SimpleGrantedAuthority("ROLE_" + it)
-                authorities.add(authority)
-            }
+
+        user.roles.forEach {
+            authorities.add(SimpleGrantedAuthority(it.name))
         }
-        user.getPermissionsList().forEach {
-            if (it.isNotEmpty()) {
-                val authority = SimpleGrantedAuthority(it)
-                authorities.add(authority)
-            }
-        }
+
         return authorities
     }
 

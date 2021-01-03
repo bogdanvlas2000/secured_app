@@ -55,6 +55,8 @@ class SecurityConfig(val detailsService: UserPrincipalDetailsService) :
         }
     }
 
+    @Bean
+    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
 
     @Bean
     fun authenticationProvider(): DaoAuthenticationProvider {
@@ -64,6 +66,5 @@ class SecurityConfig(val detailsService: UserPrincipalDetailsService) :
         return provider
     }
 
-    @Bean
-    fun passwordEncoder(): PasswordEncoder = BCryptPasswordEncoder()
+
 }

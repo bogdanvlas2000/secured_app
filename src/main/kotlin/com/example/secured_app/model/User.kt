@@ -1,12 +1,10 @@
 package com.example.secured_app.model
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
-class User(username: String, password: String, roles: String, permissions: String) {
+@Table(name = "users")
+class User(username: String, password: String, email: String, roles: MutableList<Role>, active: Int = 0) {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long = 0
@@ -15,13 +13,21 @@ class User(username: String, password: String, roles: String, permissions: Strin
 
     var password: String = password
 
-    var active: Int = 1
+    var email: String = email
 
-    var roles: String = roles
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "users_roles",
+        joinColumns = arrayOf(JoinColumn(name = "user_id")),
+        inverseJoinColumns = arrayOf(JoinColumn(name = "role_id"))
+    )
+    var roles: MutableList<Role> = roles
 
-    var permissions: String = permissions
+    var active: Int = active
 
-    fun getRolesList(): List<String> = roles.split(" ").toList()
+    override fun toString(): String {
+        return "User(id=$id, username='$username', password='$password', email='$email', roles=$roles, active=$active)"
+    }
 
-    fun getPermissionsList(): List<String> = permissions.split(" ").toList()
+
 }

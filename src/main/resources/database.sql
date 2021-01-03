@@ -3,7 +3,8 @@ create table users
     id       int primary key auto_increment,
     username varchar(255) not null unique,
     password varchar(255) not null,
-    email    varchar(255) not null unique
+    email    varchar(255) not null unique,
+    active   int
 );
 
 create table roles
@@ -27,10 +28,10 @@ create table users_roles
         unique (user_id, role_id)
 );
 
-insert users(username, password, email)
-values ('admin', '$2y$12$vALseyIrXN6a7Iqnpf8rHewBTiAGlIM/EKW0NpZohQq6SJ3xgqn4a', 'admin@mail.com'),
-       ('manager', '$2y$12$SDKWCJWx16T5M59NQSZLUuoNgX2SAQYneoXM11eMpbvXY/Vv1ImJ6', 'manager@mail.com'),
-       ('user', '$2y$12$liCyowPYRUa6Uf2PIei6AeUONzaWzW1TnpxpkJm21ci44Vd9cBMNa', 'user@mail.com');
+insert users(username, password, email, active)
+values ('admin', '$2a$04$06tfmJjiialvpszQzTWMxOdjhBLah1e1IOJo4NBLHWFBtHT2DKria', 'admin@mail.com', 1),
+       ('manager', '$2a$04$9Z5VQHfwYDph/avhfZG9Ne92ilK2pzfDQELj6xsgZ7CIeSexrmveG', 'manager@mail.com', 1),
+       ('user', '$2a$04$aQEYDZ9iNVaAwp/g8SXroORLzMFXo1f1.X1twZQ40u8a3fEWJ1v1u', 'user@mail.com', 1);
 
 insert roles(name)
 values ('ROLE_ADMIN'),
