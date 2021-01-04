@@ -65,6 +65,4 @@ class SecurityConfig(val detailsService: UserPrincipalDetailsService) :
         provider.setUserDetailsService(detailsService)
         return provider
     }
-
-
 }
