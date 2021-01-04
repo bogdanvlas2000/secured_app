@@ -31,7 +31,7 @@ function checkPassword() {
     } else {
         form.classList.add("invalidPassword");
         form.classList.remove("validPassword")
-        msg.innerText = "Password should contain at least 8 numbers and digits"
+        msg.innerText = "Password should contain at least 8 numbers or digits"
         msg.style.color = "#ff0000"
     }
 }
