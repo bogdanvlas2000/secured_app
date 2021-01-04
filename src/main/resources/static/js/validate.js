@@ -12,7 +12,7 @@ function checkUsername() {
     } else {
         form.classList.add("invalidUsername");
         form.classList.remove("validUsername")
-        msg.innerText = "Unresolved character!"
+        msg.innerText = "Username should contain letters and digits!"
         msg.style.color = "#ff0000"
     }
 }
@@ -31,7 +31,7 @@ function checkPassword() {
     } else {
         form.classList.add("invalidPassword");
         form.classList.remove("validPassword")
-        msg.innerText = "Password should contain at least 8 numbers or digits"
+        msg.innerText = "Password should contain at least 8 letters or digits"
         msg.style.color = "#ff0000"
     }
 }

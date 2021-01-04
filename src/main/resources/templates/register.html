@@ -18,7 +18,6 @@
                     <fieldset>
                         <!-- Login Controls -->
                         <div class="form-group">
-                            <label for="username">Username</label>
                             <input type="text" th:field="${user.username}"
                                    onkeyup="checkUsername()"
                                    class="form-control" id="username" placeholder="Username">
@@ -26,7 +25,6 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Password</label>
                             <input type="password" th:field="${user.password}"
                                    onkeyup="checkPassword(); confirmPasswords()"
                                    class="form-control" id="password" placeholder="Password">
@@ -34,14 +32,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="confirmPassword">Confirm password</label>
                             <input type="password" th:field="${user.confirmPassword}"
                                    onkeyup="confirmPasswords()"
                                    class="form-control" id="confirmPassword" placeholder="Confirm password">
                             <span id="confirmPasswordMsg"></span>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
                             <input type="text" th:field="${user.email}"
                                    class="form-control" id="email" placeholder="Email"
                                    onkeyup="checkEmail()">
