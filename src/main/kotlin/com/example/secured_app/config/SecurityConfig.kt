@@ -2,6 +2,7 @@ package com.example.secured_app.config
 
 import com.example.secured_app.service.UserPrincipalDetailsService
 import org.springframework.context.annotation.Bean
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -64,5 +65,10 @@ class SecurityConfig(val detailsService: UserPrincipalDetailsService) :
         provider.setPasswordEncoder(passwordEncoder())
         provider.setUserDetailsService(detailsService)
         return provider
+    }
+
+    @Bean
+    override fun authenticationManagerBean(): AuthenticationManager {
+        return super.authenticationManagerBean()
     }
 }
