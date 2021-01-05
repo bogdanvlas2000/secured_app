@@ -18,6 +18,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
+import org.springframework.validation.Errors
+import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 
 @Controller
@@ -33,23 +35,39 @@ class HomeController(
     fun login(): String = "login"
 
     @GetMapping("/register")
-    fun register(model: Model): String {
-        val user = UserDto()
-        model.addAttribute("user", user)
+    fun register(
+        model: Model,
+        @ModelAttribute(name = "errorUsername") errorUsername: String,
+        @ModelAttribute(name = "errorEmail") errorEmail: String
+    ): String {
+        if (!model.containsAttribute("user")) {
+            val user = UserDto()
+            model.addAttribute("user", user)
+        }
         return "register"
     }
 
     @PostMapping("/signup")
-    fun registerNewUser(request: HttpServletRequest, userDto: UserDto, model: Model): String {
+    fun registerNewUser(
+        request: HttpServletRequest,
+        userDto: UserDto,
+        redirectAttributes: RedirectAttributes
+    ): String {
         try {
             var user: User = userPrincipalDetailsService.registerNewUserAccount(userDto)
             println(user)
-
             authWithAuthManager(request, userDto.username, userDto.password)
         } catch (e: UsernameAlreadyExists) {
+            ////////TRY TO REDIRECT WITH ERROR
             println("username ${userDto.username} already exists!")
+            redirectAttributes.addAttribute("errorUsername", "Username ${userDto.username} exists!")
+            redirectAttributes.addFlashAttribute("user", userDto)
+            return "redirect:/register"
         } catch (e: EmailAlreadyExists) {
             println("email ${userDto.email} already exists!")
+            redirectAttributes.addAttribute("errorEmail", "Email ${userDto.email} exists!")
+            redirectAttributes.addFlashAttribute("user", userDto)
+            return "redirect:/register"
         } catch (e: Exception) {
             println("Exception while login")
             e.printStackTrace()

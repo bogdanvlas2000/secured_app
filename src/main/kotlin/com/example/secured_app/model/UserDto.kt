@@ -7,6 +7,6 @@ class UserDto(username: String = "", password: String = "", confirmPassword: Str
     val email: String = email
 
     override fun toString(): String {
-        return "UserDto(username='$username', password='$password', confirmPassword='$confirmPassword',  email='$email')"
+        return "UserDto(username='$username', password='$password', confirmPassword='$confirmPassword',  email='$email'"
     }
 }

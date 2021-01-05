@@ -98,3 +98,13 @@ function checkForm() {
         }
     }
 }
+
+function dropErrorUsername() {
+    var elem = document.getElementById("errorUsername")
+    elem.innerText = ""
+}
+
+function dropErrorEmail() {
+    var elem = document.getElementById("errorEmail")
+    elem.innerText = ""
+}
